@@ -33,7 +33,6 @@ export const useAuthStore = defineStore('auth', {
           await authApi.logout(this.refreshToken)
         }
       } catch {
-        // ignore logout errors
       } finally {
         this.user = null
         this.accessToken = null

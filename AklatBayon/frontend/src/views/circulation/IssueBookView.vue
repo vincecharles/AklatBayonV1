@@ -62,7 +62,6 @@ onMounted(async () => {
     const [s, c] = await Promise.all([studentsApi.list(), bookCopiesApi.list({ status: 'available' })])
     students.value = s.data.results || s.data
     const copies = c.data.results || c.data
-    // enrich copies with book title if available
     availableCopies.value = copies.map(copy => ({
       ...copy,
       book_title: copy.book_title || `Book #${copy.book}`

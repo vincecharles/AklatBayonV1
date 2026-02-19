@@ -1,11 +1,9 @@
 <template>
   <nav class="sidebar">
-    <!-- Dashboard -->
     <router-link to="/dashboard" class="nav-link" :class="{ active: $route.name === 'dashboard' }">
       <i class="fas fa-tachometer-alt"></i> Dashboard
     </router-link>
 
-    <!-- User Manage -->
     <div class="nav-dropdown">
       <a href="#" class="nav-link nav-dropdown-toggle" @click.prevent="toggle('userManage')">
         <i class="fas fa-users-cog"></i>
@@ -22,12 +20,10 @@
       </div>
     </div>
 
-    <!-- Student Management -->
     <router-link to="/circulation/students" class="nav-link" :class="{ active: $route.name === 'students' }">
       <i class="fas fa-user-graduate"></i> Student Management
     </router-link>
 
-    <!-- Catalog -->
     <div class="nav-dropdown">
       <a href="#" class="nav-link nav-dropdown-toggle" @click.prevent="toggle('catalog')">
         <i class="fas fa-book"></i>
@@ -50,7 +46,6 @@
       </div>
     </div>
 
-    <!-- Circulation -->
     <div class="nav-dropdown">
       <a href="#" class="nav-link nav-dropdown-toggle" @click.prevent="toggle('circulation')">
         <i class="fas fa-exchange-alt"></i>
@@ -70,7 +65,6 @@
       </div>
     </div>
 
-    <!-- Finance -->
     <div class="nav-dropdown">
       <a href="#" class="nav-link nav-dropdown-toggle" @click.prevent="toggle('finance')">
         <i class="fas fa-money-bill-wave"></i>
@@ -84,7 +78,6 @@
       </div>
     </div>
 
-    <!-- Administration -->
     <div class="nav-dropdown">
       <a href="#" class="nav-link nav-dropdown-toggle" @click.prevent="toggle('admin')">
         <i class="fas fa-chart-bar"></i>
@@ -98,7 +91,6 @@
       </div>
     </div>
 
-    <!-- System -->
     <div class="nav-dropdown">
       <a href="#" class="nav-link nav-dropdown-toggle" @click.prevent="toggle('system')">
         <i class="fas fa-cog"></i>
@@ -136,7 +128,6 @@ function toggle(group) {
   open[group] = !open[group]
 }
 
-// Auto-open the dropdown containing the active route
 watch(() => route.name, (name) => {
   if (['users', 'roles'].includes(name)) open.userManage = true
   if (['books', 'book-detail', 'authors', 'publishers', 'categories'].includes(name)) open.catalog = true

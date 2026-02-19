@@ -5,7 +5,6 @@
       <span>AklatBayon</span>
     </div>
     <div class="user-info">
-      <!-- Theme Toggle -->
       <button class="btn-theme" @click="themeStore.toggle" :title="themeStore.isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'">
         <i :class="themeStore.isDark ? 'fas fa-sun' : 'fas fa-moon'"></i>
       </button>
@@ -81,7 +80,6 @@ async function handleLogout() {
   text-align: right;
 }
 
-/* Theme Toggle Button */
 .btn-theme {
   width: 36px;
   height: 36px;

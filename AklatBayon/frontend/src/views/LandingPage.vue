@@ -1,9 +1,7 @@
 <template>
   <div class="landing-root" :class="timeClass">
-    <!-- Background Particles -->
     <div class="particles" ref="particlesEl"></div>
 
-    <!-- Status Bar -->
     <div class="status-bar">
       <div class="system-status">
         <div class="status-dot"></div>
@@ -15,9 +13,7 @@
       </div>
     </div>
 
-    <!-- Main Content -->
     <div class="main-content">
-      <!-- Logo with Scanning Animation -->
       <div class="logo-container">
         <div class="scan-ring"></div>
         <div class="scan-ring"></div>
@@ -27,7 +23,6 @@
         <img src="/images/logo.png" alt="FEATI University Logo" />
       </div>
 
-      <!-- Guest view -->
       <h1 class="main-title">FEATI-LMS</h1>
       <h2 class="sub-title">AKLATBAYON</h2>
 
@@ -44,13 +39,11 @@
       </router-link>
     </div>
 
-    <!-- Time-of-day indicator -->
     <div class="time-indicator">
       <i :class="timeIcon"></i>
       <span>{{ timeLabel }}</span>
     </div>
 
-    <!-- Welcome Toast -->
     <div class="welcome-toast" v-if="showToast">
       <div class="toast-icon">
         <i class="fas fa-check-circle"></i>
@@ -76,7 +69,6 @@ const showToast = ref(true)
 const particlesEl = ref(null)
 const hour = ref(new Date().getHours())
 
-// Time-of-day class
 const timeClass = computed(() => {
   const h = hour.value
   if (h >= 5 && h < 7) return 'time-dawn'
@@ -135,7 +127,6 @@ onMounted(() => {
   clockInterval = setInterval(updateClock, 1000)
   generateParticles()
 
-  // hide toast after 5s
   setTimeout(() => { showToast.value = false }, 5000)
 })
 
@@ -156,15 +147,12 @@ onUnmounted(() => {
   position: relative;
 }
 
-/* ── Time-of-day backgrounds ── */
 .time-night { background: linear-gradient(135deg, #0a0a1a 0%, #1a1a2e 50%, #0f3460 100%); }
 .time-dawn { background: linear-gradient(135deg, #1a1a2e 0%, #2d1b4e 30%, #e07040 70%, #f4a460 100%); }
 .time-morning { background: linear-gradient(135deg, #1565c0 0%, #42a5f5 50%, #90caf9 100%); }
 .time-afternoon { background: linear-gradient(135deg, #0d47a1 0%, #1976d2 50%, #64b5f6 100%); }
 .time-dusk { background: linear-gradient(135deg, #1a1a2e 0%, #4a1942 30%, #c0392b 70%, #e67e22 100%); }
 
-/* ── Time-aware font colors ── */
-/* Dawn */
 .time-dawn .main-title, .time-dawn .sub-title { color: #fff3e0; text-shadow: 0 0 30px rgba(244,164,96,0.4); }
 .time-dawn .system-status { color: rgba(255,243,224,0.8); }
 .time-dawn .clock { color: #fff3e0; }
@@ -180,7 +168,6 @@ onUnmounted(() => {
 .time-dawn .logo-glow { background: radial-gradient(circle, rgba(244,164,96,0.15) 0%, transparent 70%) !important; }
 .time-dawn .logo-container img { filter: drop-shadow(0 0 20px rgba(244,164,96,0.3)); }
 
-/* Morning */
 .time-morning .main-title, .time-morning .sub-title { color: #0d2137; text-shadow: 0 0 30px rgba(13,33,55,0.2); }
 .time-morning .system-status { color: rgba(13,33,55,0.7); }
 .time-morning .status-dot { background-color: #1b5e20 !important; }
@@ -201,7 +188,6 @@ onUnmounted(() => {
 .time-morning .toast-title { color: #0d2137 !important; }
 .time-morning .toast-detail { color: rgba(13,33,55,0.5) !important; }
 
-/* Afternoon */
 .time-afternoon .main-title, .time-afternoon .sub-title { color: #e3f2fd; text-shadow: 0 0 30px rgba(227,242,253,0.3); }
 .time-afternoon .system-status { color: rgba(227,242,253,0.8); }
 .time-afternoon .clock { color: #e3f2fd; }
@@ -218,7 +204,6 @@ onUnmounted(() => {
 .time-afternoon .logo-container img { filter: drop-shadow(0 0 20px rgba(100,181,246,0.3)); }
 .time-afternoon .particle { background: rgba(255,255,255,0.25) !important; }
 
-/* Dusk */
 .time-dusk .main-title, .time-dusk .sub-title { color: #ffecd2; text-shadow: 0 0 30px rgba(230,126,34,0.4); }
 .time-dusk .system-status { color: rgba(255,236,210,0.8); }
 .time-dusk .clock { color: #ffecd2; }
@@ -234,7 +219,6 @@ onUnmounted(() => {
 .time-dusk .logo-glow { background: radial-gradient(circle, rgba(230,126,34,0.15) 0%, transparent 70%) !important; }
 .time-dusk .logo-container img { filter: drop-shadow(0 0 20px rgba(230,126,34,0.3)); }
 
-/* Night */
 .time-night .main-title, .time-night .sub-title { color: #e0e6f0; text-shadow: 0 0 30px rgba(224,230,240,0.2); }
 .time-night .system-status { color: rgba(224,230,240,0.7); }
 .time-night .clock { color: #e0e6f0; }
@@ -251,7 +235,6 @@ onUnmounted(() => {
 .time-night .logo-glow { background: radial-gradient(circle, rgba(224,230,240,0.1) 0%, transparent 70%) !important; }
 .time-night .logo-container img { filter: drop-shadow(0 0 20px rgba(224,230,240,0.2)); }
 
-/* ── Status Bar ── */
 .status-bar {
   display: flex;
   justify-content: space-between;
@@ -297,7 +280,6 @@ onUnmounted(() => {
   text-align: right;
 }
 
-/* ── Main Content ── */
 .main-content {
   flex: 1;
   display: flex;
@@ -308,7 +290,6 @@ onUnmounted(() => {
   z-index: 1;
 }
 
-/* ── Logo Container ── */
 .logo-container {
   position: relative;
   width: 220px; height: 220px;
@@ -321,7 +302,6 @@ onUnmounted(() => {
   z-index: 3;
 }
 
-/* Scanning Rings */
 .scan-ring {
   position: absolute; top: 50%; left: 50%;
   transform: translate(-50%, -50%);
@@ -338,7 +318,6 @@ onUnmounted(() => {
   100% { width: 320px; height: 320px; opacity: 0; border-color: rgba(224,230,240,0); }
 }
 
-/* Scan Line */
 .scan-line {
   position: absolute; top: 0; left: 50%;
   transform: translateX(-50%);
@@ -356,7 +335,6 @@ onUnmounted(() => {
   100% { top: 200px; opacity: 0; }
 }
 
-/* Logo Glow */
 .logo-glow {
   position: absolute; top: 50%; left: 50%;
   transform: translate(-50%, -50%);
@@ -371,7 +349,6 @@ onUnmounted(() => {
   50% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
 }
 
-/* ── Titles ── */
 .main-title {
   font-size: 48px; font-weight: 900;
   text-transform: uppercase; letter-spacing: 3px;
@@ -389,7 +366,6 @@ onUnmounted(() => {
   margin-bottom: 40px; letter-spacing: 0.5px;
 }
 
-/* ── Auth Button ── */
 .auth-btn {
   display: flex; flex-direction: column;
   align-items: center; gap: 8px;
@@ -418,7 +394,6 @@ onUnmounted(() => {
   letter-spacing: 2px; text-transform: uppercase;
 }
 
-/* ── Time Indicator ── */
 .time-indicator {
   position: absolute; bottom: 20px; right: 32px;
   z-index: 10; font-size: 12px;
@@ -427,7 +402,6 @@ onUnmounted(() => {
   display: flex; align-items: center; gap: 6px;
 }
 
-/* ── Welcome Toast ── */
 .welcome-toast {
   position: fixed; bottom: 12px; left: 50%;
   transform: translateX(-50%);
@@ -471,7 +445,6 @@ onUnmounted(() => {
 }
 .toast-avatar i { font-size: 20px; color: rgba(255,255,255,0.5); }
 
-/* ── Particles ── */
 .particles {
   position: fixed; top: 0; left: 0;
   width: 100%; height: 100%;

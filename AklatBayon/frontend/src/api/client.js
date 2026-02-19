@@ -18,7 +18,6 @@ const processQueue = (error, token = null) => {
   failedQueue = []
 }
 
-// Request interceptor — attach access token
 client.interceptors.request.use((config) => {
   const token = localStorage.getItem('access_token')
   if (token) {
@@ -27,7 +26,6 @@ client.interceptors.request.use((config) => {
   return config
 })
 
-// Response interceptor — handle 401 + token refresh
 client.interceptors.response.use(
   (response) => response,
   async (error) => {

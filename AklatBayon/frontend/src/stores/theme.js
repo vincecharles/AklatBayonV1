@@ -4,7 +4,6 @@ import { ref, watch } from 'vue'
 export const useThemeStore = defineStore('theme', () => {
   const isDark = ref(localStorage.getItem('theme') === 'dark')
 
-  // Apply theme class to <html> element
   function applyTheme() {
     document.documentElement.classList.toggle('dark', isDark.value)
     localStorage.setItem('theme', isDark.value ? 'dark' : 'light')
@@ -15,7 +14,6 @@ export const useThemeStore = defineStore('theme', () => {
     applyTheme()
   }
 
-  // Apply on init
   applyTheme()
 
   return { isDark, toggle }

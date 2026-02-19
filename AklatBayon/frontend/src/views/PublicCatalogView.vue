@@ -1,6 +1,5 @@
 <template>
   <div class="catalog-page">
-    <!-- Nav -->
     <nav class="catalog-nav">
       <div class="nav-brand">
         <span class="nav-logo">📚</span>
