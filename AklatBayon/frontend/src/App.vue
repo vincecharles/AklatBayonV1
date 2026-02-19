@@ -1,6 +1,5 @@
 <template>
   <div class="app-root">
-    <!-- Authenticated layout: top header + sidebar + content -->
     <template v-if="showLayout">
       <AppTopbar />
       <AppSidebar />
@@ -9,7 +8,6 @@
       </main>
     </template>
 
-    <!-- Public / Login layout (no sidebar) -->
     <template v-else>
       <router-view />
     </template>
