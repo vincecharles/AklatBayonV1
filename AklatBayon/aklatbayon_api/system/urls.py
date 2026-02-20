@@ -11,5 +11,6 @@ urlpatterns = [
     path('reports/', views.reports, name='reports'),
     path('remote-migrate/', views.remote_migrate, name='remote_migrate'),
     path('create-remote-superuser/', views.create_remote_superuser, name='create_remote_superuser'),
+    path('remote-seed/', views.remote_seed, name='remote_seed'),
     path('', include(router.urls)),
 ]
