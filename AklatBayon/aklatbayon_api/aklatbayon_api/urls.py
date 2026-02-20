@@ -14,5 +14,5 @@ urlpatterns = [
     path('api/', include('accounts.urls')),
     path('api/', include('library.urls')),
     path('api/', include('circulation.urls')),
-    path('api/', include('system.urls')),
+    path('api/system/', include('system.urls')),
 ]
