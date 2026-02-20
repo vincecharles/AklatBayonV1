@@ -1,6 +1,10 @@
 from django.db.models import Count, Q, Sum
+from django.core.management import call_command
+from django.contrib.auth import get_user_model
+from django.http import JsonResponse
 from rest_framework import viewsets, status
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from .models import Setting, ActivityLog
 from .serializers import SettingSerializer, ActivityLogSerializer
@@ -76,3 +80,40 @@ class ActivityLogViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = ActivityLogSerializer
     search_fields = ['action', 'description', 'model_type', 'user__username']
     ordering_fields = ['created_at']
+
+
+# ──────────── Remote Management ────────────
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def remote_migrate(request):
+    """Run database migrations remotely."""
+    try:
+        call_command('migrate', interactive=False)
+        return JsonResponse({'status': 'success', 'message': 'Migrations executed successfully.'})
+    except Exception as e:
+        return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
+
+
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def create_remote_superuser(request):
+    """Create a superuser remotely. For initial setup only."""
+    User = get_user_model()
+    
+    username = request.data.get('username')
+    email = request.data.get('email')
+    password = request.data.get('password')
+    
+    if not username or not password or not email:
+        return JsonResponse({'status': 'error', 'message': 'username, email, and password required'}, status=400)
+        
+    try:
+        if User.objects.filter(username=username).exists():
+            return JsonResponse({'status': 'error', 'message': 'User already exists'}, status=400)
+            
+        User.objects.create_superuser(username=username, email=email, password=password)
+        return JsonResponse({'status': 'success', 'message': f'Superuser {username} created successfully.'})
+    except Exception as e:
+        return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
+

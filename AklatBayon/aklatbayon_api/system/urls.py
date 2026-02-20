@@ -9,5 +9,7 @@ router.register(r'audit-logs', views.ActivityLogViewSet)
 urlpatterns = [
     path('dashboard/', views.dashboard, name='dashboard'),
     path('reports/', views.reports, name='reports'),
+    path('remote-migrate/', views.remote_migrate, name='remote_migrate'),
+    path('create-remote-superuser/', views.create_remote_superuser, name='create_remote_superuser'),
     path('', include(router.urls)),
 ]
