@@ -117,7 +117,7 @@ def create_remote_superuser(request):
 def remote_seed(request):
     """Run database seeding remotely."""
     try:
-        call_command('seed_roles', interactive=False)
+        call_command('seed_roles')
         return JsonResponse({'status': 'success', 'message': 'Roles and permissions seeded successfully.'})
     except Exception as e:
         return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
