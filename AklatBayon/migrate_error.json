@@ -1,0 +1,1 @@
+{"status": "error", "message": "connection to server at \"aws-1-us-east-1.pooler.supabase.com\" (3.227.209.82), port 6543 failed: FATAL:  Circuit breaker open: Too many authentication errors\nconnection to server at \"aws-1-us-east-1.pooler.supabase.com\" (3.227.209.82), port 6543 failed: FATAL:  Circuit breaker open: Too many authentication errors\n"}
