@@ -53,10 +53,6 @@
             <label class="form-label">Password {{ editing ? '(leave blank to keep)' : '' }}</label>
             <input v-model="form.password" type="password" class="form-input" :required="!editing" />
           </div>
-          <div class="form-group">
-            <label class="form-label">User Type</label>
-            <input v-model="form.user_type" class="form-input" placeholder="e.g. librarian" />
-          </div>
         </div>
         <div class="form-row">
           <div class="form-group">
@@ -99,7 +95,7 @@ const showModal = ref(false)
 const editing = ref(null)
 const saving = ref(false)
 
-const emptyForm = { username: '', email: '', first_name: '', last_name: '', password: '', user_type: '', role: '', phone: '', is_active: true }
+const emptyForm = { username: '', email: '', first_name: '', last_name: '', password: '', role: '', phone: '', is_active: true }
 const form = ref({ ...emptyForm })
 
 const columns = [
@@ -123,7 +119,7 @@ async function fetchItems() {
 function openCreate() { editing.value = null; form.value = { ...emptyForm }; showModal.value = true }
 function openEdit(row) {
   editing.value = row
-  form.value = { username: row.username, email: row.email || '', first_name: row.first_name || '', last_name: row.last_name || '', password: '', user_type: row.user_type || '', role: row.role || '', phone: row.phone || '', is_active: row.is_active }
+  form.value = { username: row.username, email: row.email || '', first_name: row.first_name || '', last_name: row.last_name || '', password: '', role: row.role || '', phone: row.phone || '', is_active: row.is_active }
   showModal.value = true
 }
 

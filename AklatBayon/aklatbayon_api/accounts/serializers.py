@@ -36,6 +36,17 @@ class UserSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         password = validated_data.pop('password', None)
+        
+        role = validated_data.get('role')
+        if role:
+            role_slug = role.slug
+            if role_slug in ['librarian', 'student_assistant', 'student']:
+                validated_data['user_type'] = role_slug
+            elif role_slug == 'administrator':
+                validated_data['user_type'] = 'staff'
+            elif role_slug == 'faculty':
+                validated_data['user_type'] = 'teacher'
+
         user = User(**validated_data)
         if password:
             user.set_password(password)
@@ -44,6 +55,17 @@ class UserSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
         password = validated_data.pop('password', None)
+        
+        role = validated_data.get('role', instance.role)
+        if role:
+            role_slug = role.slug
+            if role_slug in ['librarian', 'student_assistant', 'student']:
+                validated_data['user_type'] = role_slug
+            elif role_slug == 'administrator':
+                validated_data['user_type'] = 'staff'
+            elif role_slug == 'faculty':
+                validated_data['user_type'] = 'teacher'
+
         for attr, value in validated_data.items():
             setattr(instance, attr, value)
         if password:
