@@ -2,7 +2,7 @@
   "version": 2,
   "builds": [
     {
-      "src": "aklatbayon_api/aklatbayon_api/wsgi.py",
+      "src": "api/index.py",
       "use": "@vercel/python",
       "config": { "maxLambdaSize": "15mb", "runtime": "python3.12" }
     },
@@ -15,7 +15,7 @@
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "aklatbayon_api/aklatbayon_api/wsgi.py"
+      "dest": "api/index.py"
     },
     {
       "src": "/(.*)",
