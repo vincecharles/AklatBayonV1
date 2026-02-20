@@ -16,7 +16,6 @@ from .serializers import (
 from library.models import BookCopy
 
 
-# ──────────── Academic ────────────
 
 class AcademicYearViewSet(viewsets.ModelViewSet):
     queryset = AcademicYear.objects.all()
@@ -40,7 +39,6 @@ def sections_by_grade(request, grade_level_id):
     return Response(SectionSerializer(sections, many=True).data)
 
 
-# ──────────── Students ────────────
 
 class StudentViewSet(viewsets.ModelViewSet):
     queryset = Student.objects.select_related('grade_level', 'section').all()
@@ -49,7 +47,6 @@ class StudentViewSet(viewsets.ModelViewSet):
     ordering_fields = ['last_name', 'student_id', 'created_at']
 
 
-# ──────────── Circulation ────────────
 
 @api_view(['POST'])
 def issue_book(request):
@@ -79,7 +76,6 @@ def issue_book(request):
         status='issued',
     )
 
-    # Mark book copy as issued
     book_copy.status = 'issued'
     book_copy.save()
 
@@ -100,18 +96,15 @@ def return_book(request):
     if transaction.status == 'returned':
         return Response({'error': 'Book already returned.'}, status=status.HTTP_400_BAD_REQUEST)
 
-    # Update transaction
     transaction.status = 'returned'
     transaction.returned_date = timezone.now()
     transaction.notes = serializer.validated_data.get('notes', transaction.notes)
     transaction.save()
 
-    # Mark book copy as available
     book_copy = transaction.book_copy
     book_copy.status = 'available'
     book_copy.save()
 
-    # Auto-create fine if overdue
     if transaction.due_date < timezone.now().date():
         from django.conf import settings as app_settings
         days_overdue = (timezone.now().date() - transaction.due_date).days
@@ -133,7 +126,6 @@ class TransactionViewSet(viewsets.ReadOnlyModelViewSet):
     ordering_fields = ['issued_date', 'due_date', 'status']
 
 
-# ──────────── Fines ────────────
 
 class FineViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Fine.objects.select_related('transaction__student', 'transaction__book_copy__book').prefetch_related('payments').all()
@@ -168,7 +160,6 @@ class FineViewSet(viewsets.ReadOnlyModelViewSet):
         return Response(FineSerializer(fine).data)
 
 
-# ──────────── Reservations ────────────
 
 class ReservationViewSet(viewsets.ModelViewSet):
     queryset = Reservation.objects.select_related('book', 'student').all()

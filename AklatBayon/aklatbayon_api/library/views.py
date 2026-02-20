@@ -24,7 +24,6 @@ class CategoryViewSet(viewsets.ModelViewSet):
     search_fields = ['name']
 
     def get_queryset(self):
-        # Return only root categories (tree is built via serializer)
         if self.action == 'list':
             return Category.objects.filter(parent__isnull=True)
         return Category.objects.all()

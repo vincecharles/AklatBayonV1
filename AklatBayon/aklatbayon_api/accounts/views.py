@@ -6,7 +6,6 @@ from .models import User, Role, Permission
 from .serializers import UserSerializer, RoleSerializer, PermissionSerializer, LoginSerializer
 
 
-# ──────────── Auth Views ────────────
 
 @api_view(['POST'])
 @permission_classes([permissions.AllowAny])
@@ -42,7 +41,6 @@ def me_view(request):
     return Response(UserSerializer(request.user).data)
 
 
-# ──────────── User CRUD ────────────
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.select_related('role').all()
@@ -51,7 +49,6 @@ class UserViewSet(viewsets.ModelViewSet):
     ordering_fields = ['username', 'date_joined', 'user_type']
 
 
-# ──────────── Role & Permission ────────────
 
 class RoleViewSet(viewsets.ModelViewSet):
     queryset = Role.objects.prefetch_related('permissions').all()
@@ -71,7 +68,6 @@ class RoleViewSet(viewsets.ModelViewSet):
                 })
             return Response(data)
 
-        # PUT — update permissions
         perm_ids = request.data.get('permission_ids', [])
         role.permissions.set(perm_ids)
         return Response({'detail': 'Permissions updated.', 'permissions': PermissionSerializer(role.permissions.all(), many=True).data})

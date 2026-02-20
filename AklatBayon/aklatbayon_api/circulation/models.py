@@ -13,7 +13,6 @@ class AcademicYear(models.Model):
         return self.year
 
     def save(self, *args, **kwargs):
-        # Ensure only one academic year is current
         if self.is_current:
             AcademicYear.objects.exclude(pk=self.pk).update(is_current=False)
         super().save(*args, **kwargs)

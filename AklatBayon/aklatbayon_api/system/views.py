@@ -12,7 +12,6 @@ from library.models import Book, BookCopy
 from circulation.models import Transaction, Fine, Student
 
 
-# ──────────── Dashboard ────────────
 
 @api_view(['GET'])
 def dashboard(request):
@@ -33,7 +32,6 @@ def dashboard(request):
     return Response(data)
 
 
-# ──────────── Reports ────────────
 
 @api_view(['GET'])
 def reports(request):
@@ -66,14 +64,12 @@ def reports(request):
     return Response(data)
 
 
-# ──────────── Settings ────────────
 
 class SettingViewSet(viewsets.ModelViewSet):
     queryset = Setting.objects.all()
     serializer_class = SettingSerializer
 
 
-# ──────────── Audit Logs ────────────
 
 class ActivityLogViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = ActivityLog.objects.select_related('user').all()
@@ -82,7 +78,6 @@ class ActivityLogViewSet(viewsets.ReadOnlyModelViewSet):
     ordering_fields = ['created_at']
 
 
-# ──────────── Remote Management ────────────
 
 @api_view(['GET'])
 @permission_classes([AllowAny])

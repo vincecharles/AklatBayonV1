@@ -3,46 +3,32 @@ from accounts.models import Permission, Role
 
 
 PERMISSIONS = [
-    # Users
     ('can_view_users', 'View Users', 'users'),
     ('can_create_users', 'Create Users', 'users'),
     ('can_edit_users', 'Edit Users', 'users'),
     ('can_delete_users', 'Delete Users', 'users'),
-    # Roles
     ('can_manage_roles', 'Manage Roles & Permissions', 'roles'),
-    # Books
     ('can_view_books', 'View Books', 'books'),
     ('can_create_books', 'Create Books', 'books'),
     ('can_edit_books', 'Edit Books', 'books'),
     ('can_delete_books', 'Delete Books', 'books'),
-    # Authors
     ('can_manage_authors', 'Manage Authors', 'books'),
-    # Publishers
     ('can_manage_publishers', 'Manage Publishers', 'books'),
-    # Categories
     ('can_manage_categories', 'Manage Categories', 'books'),
-    # Students
     ('can_view_students', 'View Students', 'students'),
     ('can_create_students', 'Create Students', 'students'),
     ('can_edit_students', 'Edit Students', 'students'),
     ('can_delete_students', 'Delete Students', 'students'),
-    # Circulation
     ('can_issue_books', 'Issue Books', 'circulation'),
     ('can_return_books', 'Return Books', 'circulation'),
     ('can_view_transactions', 'View Transactions', 'circulation'),
-    # Fines
     ('can_view_fines', 'View Fines', 'fines'),
     ('can_collect_fines', 'Collect Fines', 'fines'),
     ('can_waive_fines', 'Waive Fines', 'fines'),
-    # Reports
     ('can_view_reports', 'View Reports', 'reports'),
-    # Inventory
     ('can_view_inventory', 'View Inventory', 'inventory'),
-    # Settings
     ('can_manage_settings', 'Manage Settings', 'system'),
-    # Backup
     ('can_manage_backup', 'Manage Backup & Restore', 'system'),
-    # Audit Logs
     ('can_view_audit_logs', 'View Audit Logs', 'system'),
 ]
 

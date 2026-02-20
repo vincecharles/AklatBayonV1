@@ -16,7 +16,6 @@ DEBUG = os.environ.get('DJANGO_DEBUG', 'True').lower() in ('true', '1', 'yes')
 ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', 'localhost,127.0.0.1,.vercel.app').split(',')
 
 
-# Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -26,12 +25,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    # Third-party
     'rest_framework',
     'rest_framework_simplejwt',
     'corsheaders',
 
-    # Project apps
     'accounts',
     'library',
     'circulation',
@@ -69,8 +66,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'aklatbayon_api.wsgi.application'
 
 
-# Database
-# Using dj-database-url to parse the DATABASE_URL environment variable from Supabase
 DATABASES = {
     'default': dj_database_url.config(
         default=os.environ.get('DATABASE_URL', f'sqlite:///{BASE_DIR}/db.sqlite3'),
@@ -80,11 +75,9 @@ DATABASES = {
 }
 
 
-# Custom User Model
 AUTH_USER_MODEL = 'accounts.User'
 
 
-# Password validation
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
@@ -93,7 +86,6 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-# Django REST Framework
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
@@ -110,7 +102,6 @@ REST_FRAMEWORK = {
 }
 
 
-# JWT Settings
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(hours=1),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=7),
@@ -120,7 +111,6 @@ SIMPLE_JWT = {
 }
 
 
-# CORS Settings
 CORS_ALLOWED_ORIGINS = os.environ.get(
     'CORS_ALLOWED_ORIGINS',
     'http://localhost:5173,http://127.0.0.1:5173'  # Vite dev server
@@ -129,17 +119,14 @@ CORS_ALLOWED_ORIGINS = os.environ.get(
 CORS_ALLOW_CREDENTIALS = True
 
 
-# Internationalization
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'Asia/Manila'
 USE_I18N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 
-# Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
